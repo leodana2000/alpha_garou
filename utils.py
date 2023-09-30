@@ -7,13 +7,13 @@ load_dotenv()
 
 openai.api_key = os.environ.get("OPENAI_API_KEY")
 
-async def api_call(prompt):
+async def api_call(text, ai):
     completion = openai.ChatCompletion.create(
-        model="gpt-4",
+        model=ai,
         messages=[
             {
                 "role": "system",
-                "content": prompt
+                "content": text
             },
         ]
     )
@@ -33,5 +33,8 @@ async def api_call(prompt):
     
     return answer, thought
 
-def extract_vote(text):
-    return "Paul"
+def extract_vote(text, names):
+    for name in names:
+        if name in text:
+            return name
+    return f"Error, no vote was recorded"
