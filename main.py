@@ -128,7 +128,7 @@ async def main() :
     #     '''.format(players['names'][id])
     #     answer, _ = utils.api_call(end_of_debate + next_speaker, players['AIs'][id])
 
-    #     votes_names.append(utils.extract_vote(answer))
+    #     votes_names.append(utils.extract_vote(answer, players['names']))
 
     # votes_ids = [players['names'].index(name) for name in votes_names]
 
