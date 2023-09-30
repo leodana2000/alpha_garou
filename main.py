@@ -94,9 +94,9 @@ for id in players['ids']:
     next_speaker = '''
     It is time for {} to vote. Please express your vote by saying only the name of the players you wish to eliminate.
     '''.format(players['names'][id])
-    answer, _ = utils.api_call(end_of_debate + next_speaker)
+    answer, _ = utils.api_call(end_of_debate + next_speaker, players['AIs'][id])
 
-    votes_names.append(utils.extract_vote(answer))
+    votes_names.append(utils.extract_vote(answer, players['names']))
 votes_ids = [players['names'].index(name) for name in votes_names]
 
 print(votes_ids, random_WW[:2], game)
