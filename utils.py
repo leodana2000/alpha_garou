@@ -20,21 +20,15 @@ async def api_call(text, ai):
 
     response = completion.choices[0].message.get("content", "")
 
-    # print("response", response)
+    answer_thoughts = response.split("Thoughts:")
 
-    answer_match = re.search(r'ANSWER: "(.*?)"', response)
-    thought_match = re.search(r'THOUGHT: "(.*?)"', response)
-    
-    answer = answer_match.group(1) if answer_match else None
-    thought = thought_match.group(1) if thought_match else None
-    
-    # print("Answer:", answer)
-    # print("Thought:", thought)
-    
-    return answer, thought
+    answer = answer_thoughts[0]
+    thought = answer_thoughts[1]
+
+    return answer, answer + "\n Thoughts: " + thought
 
 def extract_vote(text, names):
     for name in names:
         if name in text:
             return name
-    return f"Error, no vote was recorded"
+    raise "Error, no vote was recorded"
